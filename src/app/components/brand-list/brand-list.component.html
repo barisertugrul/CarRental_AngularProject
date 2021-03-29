@@ -1,0 +1,22 @@
+<div class="btn-group">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="brandList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{currentBrand.name}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="brandList">
+        <button
+            routerLink = "/cars"
+            (click)="setCurrentBrand({id:0, name:'All Brands'})"
+            [class]="getBrandClass({id:0, name:'All Brands'})"
+            type="button">
+            All Brands
+        </button>
+        <button
+            routerLink = "/cars/brand/{{brand.id}}"
+            (click)="setCurrentBrand(brand)"
+            *ngFor="let brand of brands"
+            [class]="getBrandClass(brand)"
+            type="button">
+            {{brand.name}}
+        </button>
+    </div>
+  </div>

@@ -1,0 +1,22 @@
+<div class="btn-group">
+    <button class="btn btn-success dropdown-toggle" type="button" id="colorList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{currentColor.name}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="colorList">
+        <button
+            routerLink = "/cars"
+            (click)="setCurrentColor({id:0, name:'All Colors'})"
+            [class]="getColorClass({id:0, name:'All Colors'})"
+            type="button">
+            All Colors
+        </button>
+        <button
+            routerLink = "/cars/color/{{color.id}}"
+            (click)="setCurrentColor(color)"
+            *ngFor="let color of colors"
+            [class]="getColorClass(color)"
+            type="button">
+            {{color.name}}
+        </button>
+    </div>
+  </div>
