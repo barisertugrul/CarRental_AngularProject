@@ -31,7 +31,6 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-  homeUrl = environment.baseURL;
 
   constructor() { }
 
@@ -44,8 +43,4 @@ export class SidebarComponent implements OnInit {
       }
       return true;
   };
-
-  getHomeUrl(){
-    return this.homeUrl;
-  }
 }

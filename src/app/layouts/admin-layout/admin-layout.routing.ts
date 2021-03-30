@@ -8,11 +8,11 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { CarComponent } from 'app/components/car/car.component';
 import { ColorComponent } from 'app/components/color/color.component';
 import { BrandComponent } from 'app/components/brand/brand.component';
 import { RentalComponent } from 'app/components/rental/rental.component';
 import { CustomerComponent } from 'app/components/customer/customer.component';
+import { CarComponent } from 'app/components/cars/car/car.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
