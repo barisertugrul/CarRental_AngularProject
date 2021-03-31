@@ -12,6 +12,7 @@ import { ColorComponent } from './color/color.component';
 import { ColorListComponent } from './color-list/color-list.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
+import { CarDetailComponent } from './cars/car-detail/car-detail.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { RentalComponent } from './rental/rental.component';
     ColorComponent,
     ColorListComponent,
     CustomerComponent,
-    RentalComponent
+    RentalComponent,
+    CarDetailComponent
   ],
   exports: [
     FooterComponent,

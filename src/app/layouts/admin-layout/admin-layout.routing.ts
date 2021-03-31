@@ -13,6 +13,7 @@ import { BrandComponent } from 'app/components/brand/brand.component';
 import { RentalComponent } from 'app/components/rental/rental.component';
 import { CustomerComponent } from 'app/components/customer/customer.component';
 import { CarComponent } from 'app/components/cars/car/car.component';
+import { CarDetailComponent } from 'app/components/cars/car-detail/car-detail.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -62,6 +63,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'cars/brand/:brandId',  component: CarComponent },
     { path: 'cars/color/all',       component: CarComponent },
     { path: 'cars/color/:colorId',  component: CarComponent },
+    { path: 'cars/car/:carId',      component: CarDetailComponent },
     { path: 'brands',               component: BrandComponent },
     { path: 'colors',               component: ColorComponent },
     { path: 'rentals',              component: RentalComponent },

@@ -17,7 +17,6 @@ export class CarComponent implements OnInit {
   subTitle:string = "";
   images:CarImage[];
   imageUrl = environment.baseURL;
-  base64Image: any;
   
   constructor(private carService:CarDtoService,
     private activatedRoute:ActivatedRoute) { }
