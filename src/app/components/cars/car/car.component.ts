@@ -17,6 +17,7 @@ export class CarComponent implements OnInit {
   subTitle:string = "";
   images:CarImage[];
   imageUrl = environment.baseURL;
+  filterText = "";
   
   constructor(private carService:CarDtoService,
     private activatedRoute:ActivatedRoute) { }
@@ -55,6 +56,18 @@ export class CarComponent implements OnInit {
       this.subTitle = "Cars by Color"
       this.dataLoaded = true
     });
+  }
+
+  editCar(carId:Number){
+
+  }
+
+  deleteCar(carId:number){
+
+  }
+
+  rentCar(carId:number){
+    
   }
 
 }

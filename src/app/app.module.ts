@@ -23,6 +23,8 @@ import {
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
+import {ToastrModule} from "ngx-toastr"
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -34,12 +36,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+    }),
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-right"
     })
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-
+    AdminLayoutComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

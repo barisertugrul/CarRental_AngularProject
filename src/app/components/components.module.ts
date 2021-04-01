@@ -13,11 +13,15 @@ import { ColorListComponent } from './color-list/color-list.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
 import { CarDetailComponent } from './cars/car-detail/car-detail.component';
+import { FilterPipePipe } from 'app/pipes/filter-pipe.pipe';
+import { FormsModule } from '@angular/forms';
+import { VatAddedPipe } from 'app/pipes/vat-added.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
   ],
   declarations: [
     FooterComponent,
@@ -30,7 +34,9 @@ import { CarDetailComponent } from './cars/car-detail/car-detail.component';
     ColorListComponent,
     CustomerComponent,
     RentalComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    FilterPipePipe,
+    VatAddedPipe
   ],
   exports: [
     FooterComponent,

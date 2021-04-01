@@ -4,6 +4,7 @@
             <div class="col-lg-12 col-md-12">
                 <button
                     routerLink = "/cars"
+                    (click) ="getCars()" 
                     type="button"
                     class="btn btn-info">
                     Return Cars List
@@ -47,7 +48,7 @@
                       <h5 class="card-title">{{car.modelYear}}</h5>
                       <p class="card-text">{{car.colorName}}</p>
                       <p class="card-text">{{car.description}}</p>
-                      <a href="#" class="btn btn-primary btn-round">Edit</a>
+                      <a href="#" class="btn btn-primary btn-round"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
                     </div>
                     <div class="card-footer text-muted">
                       
