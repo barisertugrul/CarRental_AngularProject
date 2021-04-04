@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -16,7 +16,7 @@ export class AdminLayoutComponent implements OnInit {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
-
+  
   constructor( public location: Location, private router: Router) {}
 
   ngOnInit() {
@@ -47,7 +47,8 @@ export class AdminLayoutComponent implements OnInit {
                  window.scrollTo(0, 0);
          }
       });
-      this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+      //this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+      this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe(() => {
            elemMainPanel.scrollTop = 0;
            elemSidebar.scrollTop = 0;
       });
@@ -131,7 +132,7 @@ export class AdminLayoutComponent implements OnInit {
   ngAfterViewInit() {
       this.runOnRouteChange();
   }
-  isMaps(path){
+  isMaps(path:any){
       var titlee = this.location.prepareExternalUrl(this.location.path());
       titlee = titlee.slice( 1 );
       if(path == titlee){

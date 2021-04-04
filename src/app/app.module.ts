@@ -24,6 +24,7 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 import {ToastrModule} from "ngx-toastr"
+import { SearchFilterService } from './services/searchFilter.service';
 
 @NgModule({
   imports: [
@@ -45,7 +46,7 @@ import {ToastrModule} from "ngx-toastr"
     AppComponent,
     AdminLayoutComponent
   ],
-  providers: [],
+  providers: [SearchFilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

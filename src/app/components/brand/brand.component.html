@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header card-header-warning">
                         <h4 class="card-title">Brands List</h4>
-                        <p class="card-category">{{subTitle}}</p>
+                        <p class="card-category">{{searchResultText}}</p>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
@@ -14,7 +14,7 @@
                                 <th>Brand Name</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let brand of brands">
+                                <tr *ngFor="let brand of brands | filterBrand:filterText">
                                     <th scope="row">{{brand.id}}</th>
                                     <td>{{brand.name}}</td>
                                   </tr>

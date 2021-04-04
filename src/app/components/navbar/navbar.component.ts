@@ -1,7 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ApplicationModule, Input, Output, EventEmitter } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { AppModule } from 'app/app.module';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
-      mobile_menu_visible: any = 0;
+    mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-
+    
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
           this.sidebarVisible = false;
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit {
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
         this.sidebarClose();
-         var $layer: any = document.getElementsByClassName('close-layer')[0];
+         var $layer:any = document.getElementsByClassName('close-layer')[0];
          if ($layer) {
            $layer.remove();
            this.mobile_menu_visible = 0;
@@ -81,6 +82,7 @@ export class NavbarComponent implements OnInit {
 
             var $layer = document.createElement('div');
             $layer.setAttribute('class', 'close-layer');
+            var $this = this;
 
 
             if (body.querySelectorAll('.main-panel')) {
@@ -95,7 +97,7 @@ export class NavbarComponent implements OnInit {
 
             $layer.onclick = function() { //asign a function
               body.classList.remove('nav-open');
-              this.mobile_menu_visible = 0;
+              $this.mobile_menu_visible = 0;
               $layer.classList.remove('visible');
               setTimeout(function() {
                   $layer.remove();
@@ -122,4 +124,10 @@ export class NavbarComponent implements OnInit {
       }
       return 'Dashboard';
     }
+
+    /*
+    setMobilMenuVisible(visibility:number){
+        this.mobile_menu_visible = visibility;
+    }
+    */
 }

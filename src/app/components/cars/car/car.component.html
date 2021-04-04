@@ -1,26 +1,28 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4 col-md-4">
-                <app-brand-list></app-brand-list>
-                <app-color-list></app-color-list>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <form class="car-search-form navbar-form" id="car-search-bar">
-                    <div class="input-group no-border">
-                        <input type="text" [(ngModel)] = "filterText" value="" class="form-control" name="filterText" id="filterText" placeholder="Search Car...">
-                        <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
-                            <i class="material-icons">search</i>
-                            <div class="ripple-container"></div>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div *ngIf="filterText.length > 2" class="row">
             <div class="col-lg-12 col-md-12">
-                <div class="alert alert-success">
-                    Search for {{filterText}}.
+                <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="filter-single-tab" data-toggle="pill" href="#filter-single" role="tab" aria-controls="pills-home" aria-selected="true">Single Filter</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="filter-multiple-tab" data-toggle="pill" href="#filter-multiple" role="tab" aria-controls="pills-profile" aria-selected="false">Multiple Filter</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="filter-single" role="tabpanel" aria-labelledby="filter-single-tab">
+                        <div class="col-lg-12 col-md-12">
+                            <app-brand-list></app-brand-list>
+                            <app-color-list></app-color-list>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="filter-multiple" role="tabpanel" aria-labelledby="filter-multiple-tab">
+                        <div class="col-lg-12 col-md-12">
+                            <app-brand-list></app-brand-list>
+                            <app-color-list></app-color-list>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,7 +33,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <h4 class="card-title">Cars List</h4>
-                                <p class="card-category">{{subTitle}}</p>
+                                <p class="card-category">{{searchResultText}}</p>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -58,7 +60,7 @@
                             <tbody>
                                 <tr
                                 routerLink = "/cars/car/{{car.carId}}"
-                                 *ngFor="let car of cars | filterPipe:filterText">
+                                 *ngFor="let car of cars | filterCar:filterText">
                                     <th scope="row">{{car.carId}}</th>
                                     <td>{{car.brandName}}</td>
                                     <td>{{car.carName}}</td>

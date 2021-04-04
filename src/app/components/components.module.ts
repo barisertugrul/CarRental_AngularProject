@@ -13,9 +13,14 @@ import { ColorListComponent } from './color-list/color-list.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
 import { CarDetailComponent } from './cars/car-detail/car-detail.component';
-import { FilterPipePipe } from 'app/pipes/filter-pipe.pipe';
+import { FilterCarPipe } from 'app/pipes/filter-car.pipe';
 import { FormsModule } from '@angular/forms';
 import { VatAddedPipe } from 'app/pipes/vat-added.pipe';
+import { CarAddComponent } from './cars/car-add/car-add.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FilterBrandPipe } from 'app/pipes/filter-brand.pipe';
+import { FilterColorPipe } from 'app/pipes/filter-color.pipe';
+import { BrandColorFilterComponent } from './brand-color-filter/brand-color-filter.component';
 
 @NgModule({
   imports: [
@@ -35,8 +40,13 @@ import { VatAddedPipe } from 'app/pipes/vat-added.pipe';
     CustomerComponent,
     RentalComponent,
     CarDetailComponent,
-    FilterPipePipe,
-    VatAddedPipe
+    FilterCarPipe,
+    FilterBrandPipe,
+    FilterColorPipe,
+    VatAddedPipe,
+    CarAddComponent,
+    SearchBarComponent,
+    BrandColorFilterComponent
   ],
   exports: [
     FooterComponent,

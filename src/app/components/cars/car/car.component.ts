@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CarDto } from 'app/models/carDto';
 import { CarImage } from 'app/models/carImage';
 import { CarDtoService } from 'app/services/car-dto.service';
+import { SearchFilterService } from 'app/services/searchFilter.service';
 import { environment } from 'environments/environment';
+
 
 @Component({
   selector: 'app-car',
@@ -17,10 +19,10 @@ export class CarComponent implements OnInit {
   subTitle:string = "";
   images:CarImage[];
   imageUrl = environment.baseURL;
-  filterText = "";
   
   constructor(private carService:CarDtoService,
-    private activatedRoute:ActivatedRoute) { }
+    private activatedRoute:ActivatedRoute,
+    private searchFilterService:SearchFilterService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -32,6 +34,7 @@ export class CarComponent implements OnInit {
         this.getCars();
       }
     });
+    this.filterText = "";
   }
 
   getCars(){
@@ -68,6 +71,19 @@ export class CarComponent implements OnInit {
 
   rentCar(carId:number){
     
+  }
+
+  get filterText():string{
+    return this.searchFilterService.filterData;
+  }
+
+  set filterText(value: string){
+    this.searchFilterService.filterData = value;
+  }
+
+  get searchResultText(){
+    let filterData = this.searchFilterService.filterData;
+    return (filterData.length > 0)?"Search results for \"" + filterData + "\"":"All Cars";
   }
 
 }
