@@ -8,7 +8,7 @@ declare var $: any;
 export class NotificationsComponent implements OnInit {
 
   constructor() { }
-  showNotification(from, align){
+  showNotification(from:any, align:any){
       const type = ['','info','success','warning','danger'];
 
       const color = Math.floor((Math.random() * 4) + 1);

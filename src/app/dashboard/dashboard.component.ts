@@ -9,13 +9,13 @@ import * as Chartist from 'chartist';
 export class DashboardComponent implements OnInit {
 
   constructor() { }
-  startAnimationForLineChart(chart){
+  startAnimationForLineChart(chart:any){
       let seq: any, delays: any, durations: any;
       seq = 0;
       delays = 80;
       durations = 500;
 
-      chart.on('draw', function(data) {
+      chart.on('draw', function(data:any) {
         if(data.type === 'line' || data.type === 'area') {
           data.element.animate({
             d: {
@@ -42,13 +42,13 @@ export class DashboardComponent implements OnInit {
 
       seq = 0;
   };
-  startAnimationForBarChart(chart){
+  startAnimationForBarChart(chart:any){
       let seq2: any, delays2: any, durations2: any;
 
       seq2 = 0;
       delays2 = 80;
       durations2 = 500;
-      chart.on('draw', function(data) {
+      chart.on('draw', function(data:any) {
         if(data.type === 'bar'){
             seq2++;
             data.element.animate({
@@ -135,7 +135,7 @@ export class DashboardComponent implements OnInit {
         ['screen and (max-width: 640px)', {
           seriesBarDistance: 5,
           axisX: {
-            labelInterpolationFnc: function (value) {
+            labelInterpolationFnc: function (value:any) {
               return value[0];
             }
           }

@@ -8,10 +8,10 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { ColorComponent } from 'app/components/color/color.component';
-import { BrandComponent } from 'app/components/brand/brand.component';
-import { RentalComponent } from 'app/components/rental/rental.component';
-import { CustomerComponent } from 'app/components/customer/customer.component';
+import { ColorComponent } from 'app/components/colors/color/color.component';
+import { BrandComponent } from 'app/components/brands/brand/brand.component';
+import { RentalComponent } from 'app/components/rentals/rental/rental.component';
+import { CustomerComponent } from 'app/components/users/customer/customer.component';
 import { CarComponent } from 'app/components/cars/car/car.component';
 import { CarDetailComponent } from 'app/components/cars/car-detail/car-detail.component';
 

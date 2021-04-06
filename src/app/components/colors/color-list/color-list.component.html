@@ -4,16 +4,16 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="colorList">
         <button
-            routerLink = "/cars"
+            [routerLink]="getRouterLink()"
             (click)="setCurrentColor({id:0, name:'All Colors'})"
             [class]="getColorClass({id:0, name:'All Colors'})"
             type="button">
             All Colors
         </button>
         <button
-            routerLink = "/cars/color/{{color.id}}"
-            (click)="setCurrentColor(color)"
             *ngFor="let color of colors"
+            [routerLink]="getRouterLink(color.id)"
+            (click)="setCurrentColor(color)"
             [class]="getColorClass(color)"
             type="button">
             {{color.name}}

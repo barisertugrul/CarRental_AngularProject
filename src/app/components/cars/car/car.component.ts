@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'app/models/brand';
 import { CarDto } from 'app/models/carDto';
 import { CarImage } from 'app/models/carImage';
+import { Color } from 'app/models/color';
 import { CarDtoService } from 'app/services/car-dto.service';
 import { SearchFilterService } from 'app/services/searchFilter.service';
 import { environment } from 'environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,13 +19,15 @@ export class CarComponent implements OnInit {
 
   cars:CarDto[] = [];
   dataLoaded = false;
-  subTitle:string = "";
   images:CarImage[];
   imageUrl = environment.baseURL;
+  filterBrand : Brand = {id:0,name:"All Brands"};
+  filterColor : Color = {id:0,name:"All Colors"};
   
   constructor(private carService:CarDtoService,
     private activatedRoute:ActivatedRoute,
-    private searchFilterService:SearchFilterService) { }
+    private searchFilterService:SearchFilterService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -40,7 +45,8 @@ export class CarComponent implements OnInit {
   getCars(){
     this.carService.getCars().subscribe(response=>{
       this.cars = response.data
-      this.subTitle = "All Cars"
+      //this.subTitle = "All Cars"
+      this.toastrService.success("All Cars")
       this.dataLoaded = true
     });
   }
@@ -48,16 +54,35 @@ export class CarComponent implements OnInit {
   getCarsByBrand(brandId:number){
     this.carService.getCarsByBrand(brandId).subscribe(response=>{
       this.cars = response.data
-      this.subTitle = "Cars by Brand"
+      let message = (brandId < 1)? "All Brands":this.filterBrand.name
+      //this.subTitle = "Cars by " + message
       this.dataLoaded = true
+      if(this.filterBrand.id > 0){
+        this.toastrService.success("Cars listed for " + message)
+      }
     });
   }
 
   getCarsByColor(colorId:number){
     this.carService.getCarsByColor(colorId).subscribe(response=>{
       this.cars = response.data
-      this.subTitle = "Cars by Color"
+      let message = (colorId < 1)? "All Colors":this.filterColor.name + " colored"
+      //this.subTitle = "Cars by " + message
       this.dataLoaded = true
+      if(this.filterColor.id > 0){
+        this.toastrService.success("Cars listed for " + message)
+      }
+    });
+  }
+
+  getCarsByBrandAndColor(){
+    this.carService.getCarsByBrandAndColor(this.filterBrand.id,this.filterColor.id).subscribe(response=>{
+      this.cars = response.data
+      let brandMessage = (this.filterBrand.id < 1)? "All Brands":this.filterBrand.name
+      let colorMessage = (this.filterColor.id < 1)? "All Colors":this.filterColor.name + " colored"
+      //this.subTitle = "Cars by " + brandMessage + " and " + colorMessage
+      this.dataLoaded = true
+      this.toastrService.success("Cars listed for with " + brandMessage + " and " + colorMessage)
     });
   }
 
@@ -81,9 +106,28 @@ export class CarComponent implements OnInit {
     this.searchFilterService.filterData = value;
   }
 
-  get searchResultText(){
-    let filterData = this.searchFilterService.filterData;
-    return (filterData.length > 0)?"Search results for \"" + filterData + "\"":"All Cars";
+  get subTitle(){
+    //let filterData = this.searchFilterService.filterData;
+    let isFiltered = false;
+    let title = "";
+    if(this.filterBrand.id > 0 || this.filterColor.id > 0){
+      let brandMessage = (this.filterBrand.id < 1)? "All Brands" : this.filterBrand.name
+      let colorMessage = (this.filterColor.id < 1)? "All Colors" : this.filterColor.name + " colored"
+      title = "Cars by " + brandMessage + " and " + colorMessage
+      isFiltered = true
+    }
+    return (this.filterText.length > 0)?"Search results for \"" + this.filterText + "\""
+    :(isFiltered)?title:"All Cars";
+  }
+
+  colorFilter(color:Color){
+    //console.log("Color ID: " + color.id);
+    this.filterColor = color;
+  }
+
+  brandFilter(brand:Brand){
+    //console.log("Brand ID: " + brand.id);
+    this.filterBrand = brand;
   }
 
 }
