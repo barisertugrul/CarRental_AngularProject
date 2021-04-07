@@ -1,60 +1,119 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <button
-                    routerLink = "/cars"
-                    (click) ="getCars()" 
-                    type="button"
-                    class="btn btn-info">
-                    Return Cars List
-                </button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <button
+          routerLink="/cars"
+          (click)="getCars()"
+          type="button"
+          class="btn btn-info"
+        >
+          Return Cars List
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card text-center">
+          <div class="card-header">
+            <div *ngIf="!car" class="alert alert-info w-100" role="alert">
+              Not exist cars
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card text-center">
-                    <div class="card-header">
-                      {{car.brandName}}
-                    </div>
-                    
-                    <div class="card-body">
-                        <div id="carCarousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                              <li *ngFor="let image of images; let i = index" data-target="#carCarousel" [data-slide-to]="getSlideNumber(i)"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                              <div *ngFor="let image of images; let i = index" [ngClass]="getSlideClass(i)">
-                                <img class="d-block h-100" src="{{imageUrl}}/{{image.imagePath}}" alt="{{car.brandName}}">
-                              </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#carCarousel" role="button" data-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carCarousel" role="button" data-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="sr-only">Next</span>
-                            </a>
-                          </div>
-                    </div>
+            <span *ngIf="car" class="badge badge-pill badge-danger car-brand">{{
+              car.brandName
+            }}</span>
+          </div>
+
+          <div *ngIf="car" class="card-body">
+            <div id="carCarousel" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li
+                  *ngFor="let image of images; let i = index"
+                  data-target="#carCarousel"
+                  [data-slide-to]="getSlideNumber(i)"
+                ></li>
+              </ol>
+              <div class="carousel-inner">
+                <div
+                  *ngFor="let image of images; let i = index"
+                  [ngClass]="getSlideClass(i)"
+                >
+                  <img
+                    class="d-block h-100"
+                    src="{{ imageUrl }}/{{ image.imagePath }}"
+                    alt="{{ car.brandName }}"
+                  />
                 </div>
-                <div class="card text-center">
-                    <div class="card-header">
-                      {{car.carName}}
-                    </div>
-                    <div class="card-body">
-                      <h4 class="card-title">{{car.dailyPrice | currency}}</h4>
-                      <h5 class="card-title">{{car.modelYear}}</h5>
-                      <p class="card-text">{{car.colorName}}</p>
-                      <p class="card-text">{{car.description}}</p>
-                      <a href="#" class="btn btn-primary btn-round"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                      
-                    </div>
-                  </div>
+              </div>
+              <a
+                class="carousel-control-prev"
+                href="#carCarousel"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carCarousel"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
+          </div>
         </div>
+        <div *ngIf="car" class="card">
+          <div class="card-header text-center">Car Detail</div>
+          <div class="card-body">
+            <table class="table table-striped table-dark">
+              <tbody>
+                <tr>
+                  <th scope="row">Model Name</th>
+                  <td>{{ car.carName }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Model Year</th>
+                  <td>{{ car.modelYear }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Color</th>
+                  <td>{{ car.colorName }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Description</th>
+                  <td>{{ car.description }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Daily Price</th>
+                  <td>{{ car.dailyPrice | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer text-muted">
+            <div class="col-lg-12 col-md-12">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-success btn-round me-md-2" type="button">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                </button>
+                <app-rental-in-car-detail
+                  [car]="car"
+                ></app-rental-in-car-detail>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>

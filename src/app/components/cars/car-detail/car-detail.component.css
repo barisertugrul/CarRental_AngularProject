@@ -2,3 +2,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.badge.car-brand{
+    font-size: large;
+}

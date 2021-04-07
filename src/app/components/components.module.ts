@@ -21,6 +21,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FilterBrandPipe } from 'app/pipes/filter-brand.pipe';
 import { FilterColorPipe } from 'app/pipes/filter-color.pipe';
 import { BrandColorFilterComponent } from './brands/brand-color-filter/brand-color-filter.component';
+import { RentalInCarDetailComponent } from './rentals/rental-in-car-detail/rental-in-car-detail.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { BrandColorFilterComponent } from './brands/brand-color-filter/brand-col
     VatAddedPipe,
     CarAddComponent,
     SearchBarComponent,
-    BrandColorFilterComponent
+    BrandColorFilterComponent,
+    RentalInCarDetailComponent
   ],
   exports: [
     FooterComponent,
