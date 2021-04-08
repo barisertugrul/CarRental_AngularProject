@@ -17,7 +17,7 @@
         <div class="card text-center">
           <div class="card-header">
             <div *ngIf="!car" class="alert alert-info w-100" role="alert">
-              Not exist cars
+              Not exist car
             </div>
             <span *ngIf="car" class="badge badge-pill badge-danger car-brand">{{
               car.brandName
@@ -30,7 +30,7 @@
                 <li
                   *ngFor="let image of images; let i = index"
                   data-target="#carCarousel"
-                  [data-slide-to]="getSlideNumber(i)"
+                  data-slide-to="{{getSlideNumber(i)}}"
                 ></li>
               </ol>
               <div class="carousel-inner">
@@ -75,7 +75,7 @@
         <div *ngIf="car" class="card">
           <div class="card-header text-center">Car Detail</div>
           <div class="card-body">
-            <table class="table table-striped table-dark">
+            <table class="table table-striped">
               <tbody>
                 <tr>
                   <th scope="row">Model Name</th>

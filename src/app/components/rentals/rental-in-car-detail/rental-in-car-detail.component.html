@@ -3,6 +3,7 @@
   type="button"
   data-bs-toggle="modal"
   data-bs-target="#modalRentForm"
+  (click) = "showRentForm()"
 >
   <i class="fa fa-cart-plus" aria-hidden="true"></i>
   Rent Now!
@@ -17,7 +18,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalRentFormLabel">New message</h5>
+        <h5 class="modal-title" id="modalRentFormLabel">New rental</h5>
         <button
           type="button"
           class="close"
@@ -29,9 +30,21 @@
       </div>
       <div class="modal-body">
         <form>
+            <div class="form-group">
+              <label for="customer-name">Customer</label>
+              <select [(ngModel)]="selectedCustomer" name="customer-name" id="customer-name" class="form-control">
+                <option value=0>Choose a customer...</option>
+                <option *ngFor="let customer of customers" value={{customer.id}}>{{getFullName(customer)}}</option>
+              </select>
+              <p>Selected Option: {{selectedCustomer}}</p>
+            </div>
+
+              
+            <app-ngbd-datepicker-range></app-ngbd-datepicker-range>
+              
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label"
-              >Recipient:</label
+            <label for="rent" class="col-form-label"
+              >Customer:</label
             >
             <input type="text" class="form-control" id="recipient-name" />
           </div>

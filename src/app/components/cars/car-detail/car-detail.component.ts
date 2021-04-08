@@ -16,6 +16,7 @@ export class CarDetailComponent implements OnInit {
   subTitle:string = "";
   images:CarImage[];
   imageUrl = environment.baseURL;
+  model: any;
   
   constructor(private carService:CarDtoService,
     private activatedRoute:ActivatedRoute,
@@ -41,8 +42,6 @@ export class CarDetailComponent implements OnInit {
       this.images = this.car.images;
       this.subTitle = "";
       this.dataLoaded = true;
-      console.log(this.images);
-      console.log(this.car);
     });
   }
 
@@ -55,7 +54,6 @@ export class CarDetailComponent implements OnInit {
     }
   }
   getSlideNumber(index:Number){
-    console.log("index: " + index)
     return index.toString();
   }
 

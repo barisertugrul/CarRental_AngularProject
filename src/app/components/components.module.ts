@@ -22,6 +22,11 @@ import { FilterBrandPipe } from 'app/pipes/filter-brand.pipe';
 import { FilterColorPipe } from 'app/pipes/filter-color.pipe';
 import { BrandColorFilterComponent } from './brands/brand-color-filter/brand-color-filter.component';
 import { RentalInCarDetailComponent } from './rentals/rental-in-car-detail/rental-in-car-detail.component';
+import { DatepickerPopupComponent } from './datepicker-popup/datepicker-popup.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datepicker-range.component';
+//import { ClickOutsideDirective } from 'app/directives/click-outside.directive';
+
 
 @NgModule({
   imports: [
@@ -48,7 +53,11 @@ import { RentalInCarDetailComponent } from './rentals/rental-in-car-detail/renta
     CarAddComponent,
     SearchBarComponent,
     BrandColorFilterComponent,
-    RentalInCarDetailComponent
+    RentalInCarDetailComponent,
+    DatepickerPopupComponent,
+    TabsComponent,
+    NgbdDatepickerRangeComponent,
+    //ClickOutsideDirective, 
   ],
   exports: [
     FooterComponent,
