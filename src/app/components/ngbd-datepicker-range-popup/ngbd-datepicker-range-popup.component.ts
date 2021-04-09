@@ -1,30 +1,34 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-ngbd-datepicker-range',
-  templateUrl: './ngbd-datepicker-range.component.html',
-  styleUrls: ['./ngbd-datepicker-range.component.css']
+  selector: 'app-ngbd-datepicker-range-popup',
+  templateUrl: './ngbd-datepicker-range-popup.component.html',
+  styleUrls: ['./ngbd-datepicker-range-popup.component.css']
 })
-export class NgbdDatepickerRangeComponent implements OnInit {
+export class NgbdDatepickerRangePopupComponent implements OnInit {
+
 
   hoveredDate: NgbDate | null = null;
 
-  fromDate: NgbDate;
-  toDate: NgbDate | null = null;
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
+  today = this.calendar.getToday();
   
   @Input() controlName:string = "RentDateRange";
   @Output() dateRangeValue = new EventEmitter();
+  
+  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) { }
 
-  constructor(calendar: NgbCalendar) {
-    //this.fromDate = calendar.getToday();
-    //this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  ngOnInit(): void {
+    // this.fromDate = this.calendar.getToday();
+    // this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
   }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
     } else {
       this.toDate = null;
@@ -45,7 +49,9 @@ export class NgbdDatepickerRangeComponent implements OnInit {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
   }
 
-  ngOnInit(): void {
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
 }

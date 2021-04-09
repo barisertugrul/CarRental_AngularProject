@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, ApplicationModule, Input, Output, EventE
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
-import { AppModule } from 'app/app.module';
 
 @Component({
   selector: 'app-navbar',

@@ -26,13 +26,6 @@
 
           <div *ngIf="car" class="card-body">
             <div id="carCarousel" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li
-                  *ngFor="let image of images; let i = index"
-                  data-target="#carCarousel"
-                  data-slide-to="{{getSlideNumber(i)}}"
-                ></li>
-              </ol>
               <div class="carousel-inner">
                 <div
                   *ngFor="let image of images; let i = index"

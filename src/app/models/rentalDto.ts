@@ -9,4 +9,5 @@ export interface RentalDto{
     companyName:string;
     rentDate:Date;
     returnDate:Date;
+    confirm:boolean;
 }

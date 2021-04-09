@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SearchFilterService } from 'app/services/searchFilter.service';
 
+import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',

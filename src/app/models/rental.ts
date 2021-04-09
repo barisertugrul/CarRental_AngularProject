@@ -5,5 +5,5 @@ export interface Rental{
     rentStartDate   : Date;
     rentEndDate     : Date;
     returnDate      : Date;
-    comfirm         : boolean;
+    confirm         : boolean;
 }

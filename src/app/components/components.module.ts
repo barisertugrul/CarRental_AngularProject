@@ -14,7 +14,7 @@ import { CustomerComponent } from './users/customer/customer.component';
 import { RentalComponent } from './rentals/rental/rental.component';
 import { CarDetailComponent } from './cars/car-detail/car-detail.component';
 import { FilterCarPipe } from 'app/pipes/filter-car.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VatAddedPipe } from 'app/pipes/vat-added.pipe';
 import { CarAddComponent } from './cars/car-add/car-add.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -22,9 +22,9 @@ import { FilterBrandPipe } from 'app/pipes/filter-brand.pipe';
 import { FilterColorPipe } from 'app/pipes/filter-color.pipe';
 import { BrandColorFilterComponent } from './brands/brand-color-filter/brand-color-filter.component';
 import { RentalInCarDetailComponent } from './rentals/rental-in-car-detail/rental-in-car-detail.component';
-import { DatepickerPopupComponent } from './datepicker-popup/datepicker-popup.component';
-import { TabsComponent } from './tabs/tabs.component';
 import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datepicker-range.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdDatepickerRangePopupComponent } from './ngbd-datepicker-range-popup/ngbd-datepicker-range-popup.component';
 //import { ClickOutsideDirective } from 'app/directives/click-outside.directive';
 
 
@@ -33,6 +33,8 @@ import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datep
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
   ],
   declarations: [
     FooterComponent,
@@ -54,10 +56,8 @@ import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datep
     SearchBarComponent,
     BrandColorFilterComponent,
     RentalInCarDetailComponent,
-    DatepickerPopupComponent,
-    TabsComponent,
     NgbdDatepickerRangeComponent,
-    //ClickOutsideDirective, 
+    NgbdDatepickerRangePopupComponent,
   ],
   exports: [
     FooterComponent,

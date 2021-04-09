@@ -16,7 +16,8 @@
                   <th>Color</th>
                   <th>Customer</th>
                   <th>E-Mail</th>
-                  <th>Rent Date</th>
+                  <th>Rent Start Date</th>
+                  <th>Rent End Date</th>
                   <th>Return Date</th>
                 </thead>
                 <tbody>
@@ -27,7 +28,8 @@
                     <td>{{ rental.colorName }}</td>
                     <td>{{ getFullName(rental) }}</td>
                     <td>{{ rental.email }}</td>
-                    <td>{{ rental.rentDate | date: "dd.MM.y HH:mm a z" }}</td>
+                    <td>{{ rental.rentStartDate | date: "dd.MM.y HH:mm a z" }}</td>
+                    <td>{{ rental.rentEndDate | date: "dd.MM.y HH:mm a z" }}</td>
                     <td>{{ rental.returnDate | date: "dd.MM.y HH:mm a z" }}</td>
                   </tr>
                 </tbody>
