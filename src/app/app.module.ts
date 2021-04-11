@@ -26,6 +26,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import {ToastrModule} from "ngx-toastr"
 import { SearchFilterService } from './services/searchFilter.service';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { ClickCursorDirective } from './directives/click-cursor.directive';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    ClickCursorDirective
   ],
   providers: [SearchFilterService],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+.amount{
+    font-size: 24;
+    font-weight: bold;
+}
+
+.form-group.checkbox{
+    padding-left: 20px;
+}
+
+.saved-card-badge{
+    margin-right: 5px;
+}
+
+.clickable{
+    cursor: pointer;
+}

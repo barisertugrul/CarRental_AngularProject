@@ -33,15 +33,14 @@
             <div class="form-group">
               <label for="customer-name">Customer</label>
               <select (change) = "customerChange()" name="customer-name" id="customer-name" formControlName="customerId" class="form-control">
-                <option value=0>Choose a customer...</option>
-                <option *ngFor="let customer of customers" value={{customer.id}}>{{getFullName(customer)}}</option>
+                <option value="0">Choose a customer...</option>
+                <option *ngFor="let customer of customers" [value]="customer.id">{{getFullName(customer)}}</option>
               </select>
             </div>
             <div *ngIf="dateRangeStart" class="alert alert-info" role="alert">
               Total Amount: {{totalAmount | vatAdded:18 | currency}}
             </div>
             <app-ngbd-datepicker-range-popup (dateRangeValue) = "dateRangeValue($event)" [controlName] = "rentRange"></app-ngbd-datepicker-range-popup>
-
         </form>
       </div>
       <div class="modal-footer">

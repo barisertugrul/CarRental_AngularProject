@@ -1,9 +1,8 @@
 export interface CreditCard{
     id          : number;
     customerId  : number;
-    cardName    : string;
     cardHolder  : string;
-    CardNumber  : string;
+    cardNumber  : string;
     expYear     : string;
     expMonth    : string;
 }

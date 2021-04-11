@@ -14,6 +14,8 @@ import { RentalComponent } from 'app/components/rentals/rental/rental.component'
 import { CustomerComponent } from 'app/components/users/customer/customer.component';
 import { CarComponent } from 'app/components/cars/car/car.component';
 import { CarDetailComponent } from 'app/components/cars/car-detail/car-detail.component';
+import { PaymentComponent } from 'app/components/Payments/payment/payment.component';
+import { PaymentSuccessComponent } from 'app/components/Payments/payment-success/payment-success.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -69,6 +71,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rentals',              component: RentalComponent },
     { path: 'customers',            component: CustomerComponent },
     { path: 'dashboard',            component: DashboardComponent },
+    { path: 'payment',              component: PaymentComponent },
+    { path: 'payment/success',      component: PaymentSuccessComponent },
     { path: 'user-profile',         component: UserProfileComponent },
     { path: 'table-list',           component: TableListComponent },
     { path: 'typography',           component: TypographyComponent },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerDto } from 'app/models/customerDto';
-import { CustomerDtoService } from 'app/services/customer-dto.service';
+import { CustomerService } from 'app/services/customer.service';
 
 @Component({
   selector: 'app-customer',
@@ -13,14 +13,14 @@ export class CustomerComponent implements OnInit {
   dataLoaded = false;
   subTitle:string = "";
   
-  constructor(private customerService:CustomerDtoService) { }
+  constructor(private customerService:CustomerService) { }
 
   ngOnInit(): void {
     this.getCustomers();
   }
 
   getCustomers(){
-    this.customerService.getCustomers().subscribe(response=>{
+    this.customerService.getCustomersWithDetails().subscribe(response=>{
       this.customers = response.data
       this.subTitle = "All Customers"
       this.dataLoaded = true

@@ -5,5 +5,6 @@ export interface Rental{
     rentStartDate   : Date;
     rentEndDate     : Date;
     returnDate      : Date;
-    confirm         : boolean;
+    amount          : number;
+    payConfirm      : boolean;
 }

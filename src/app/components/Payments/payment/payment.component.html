@@ -1,0 +1,172 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Credit Card Infos</h4>
+                        <p class="card-category">Choose one of your saved cards or use a new card to pay</p>
+                    </div>
+                    <div class="card-body">
+                        <div *ngIf="cards" class="col-lg-12 col-md-12">
+                            <h5>Your saved cards</h5>
+                            <ul class="list-group">
+                                <li *ngFor="let creditCard of cards" [class]="getCardClass(creditCard)" (click)="setCurrentCard(creditCard)">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            {{creditCard.cardHolder}}
+                                            <span (click)="updateCard(creditCard)" class="badge badge-success saved-card-badge">Update</span>
+                                            <span (click)="removeCard(creditCard)" class="badge badge-danger saved-card-badge">Remove</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            {{creditCard.cardNumber}} ({{creditCard.expMonth}}/{{creditCard.expYear}})
+                                        </div>
+                                    </div>
+                                </li>
+                          </ul>
+                        </div>
+                        <form *ngIf="formLoaded" [formGroup]="cardAddForm">
+                            <div class="form-group">
+                              <label for="cardHolderName">Card Holder Name</label>
+                              <input type="text" formControlName="cardHolder" class="form-control" id="cardHolderName" placeholder="CARD HOLDER NAME">
+                            </div>
+                            <div class="form-group">
+                              <label for="cardNumber">Card Number</label>
+                              <input type="text" formControlName="cardNumber" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000">
+                            </div>
+
+                            <label for="">Expiration Date</label>
+                            <div class="form-row">
+                              <div class="form-group col-md-4">
+                                <label for="month">Month</label>
+                                <select id="month" formControlName="expMonth" class="form-control">
+                                  <option value="0">Choose...</option>
+                                  <option value="01">01</option>
+                                  <option value="02">02</option>
+                                  <option value="03">03</option>
+                                  <option value="04">04</option>
+                                  <option value="05">05</option>
+                                  <option value="06">06</option>
+                                  <option value="07">07</option>
+                                  <option value="08">08</option>
+                                  <option value="09">09</option>
+                                  <option value="10">10</option>
+                                  <option value="11">11</option>
+                                  <option value="12">12</option>
+                                </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="year">Year</label>
+                                <select id="year" formControlName="expYear" class="form-control">
+                                  <option value="0">Choose...</option>
+                                  <option value="2021">2021</option>
+                                  <option value="2022">2022</option>
+                                  <option value="2023">2023</option>
+                                  <option value="2024">2024</option>
+                                  <option value="2025">2025</option>
+                                  <option value="2026">2026</option>
+                                  <option value="2027">2027</option>
+                                  <option value="2028">2028</option>
+                                  <option value="2029">2029</option>
+                                  <option value="2030">2030</option>
+                                </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="cvv">CVV</label>
+                                <input type="text" formControlName="cvv" class="form-control" id="cvv">
+                              </div>
+                            </div>
+                            <div class="form-group checkbox">
+                                <input class="form-check-input" type="checkbox" id="saveCheck" (change) = "saveCheck($event.target.checked)">
+                                <label class="form-check-label" for="saveCheck">
+                                  Save my card details for future payments
+                                </label>
+                            </div>
+                          </form>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#exampleCards" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                  Example Cards
+                                </a>
+                              </p>
+                              <div class="collapse" id="exampleCards">
+                                <div class="card card-body table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="text-warning">
+                                                <th>ID</th>
+                                                <th>Card Holder</th>
+                                                <th>Card Number</th>
+                                                <th>Exp Month</th>
+                                                <th>Exp Year</th>
+                                                <th>CVV</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                (click) = "fillForm(exampleCard)" class="clickable"
+                                                 *ngFor="let exampleCard of testCards">
+                                                    <th scope="row">{{exampleCard.id}}</th>
+                                                    <td>{{exampleCard.cardHolder}}</td>
+                                                    <td>{{exampleCard.cardNumber}}</td>
+                                                    <td>{{exampleCard.expMonth}}</td>
+                                                    <td>{{exampleCard.expYear}}</td>
+                                                    <td>{{exampleCard.cvv}}</td>
+                                                  </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title">Payment Details</h4>
+                        <p class="card-category">Your Rent Details</p>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table *ngIf="rental && car" class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Brand</td>
+                                    <td>{{car.brandName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Model Name</td>
+                                    <td>{{car.carName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Model Year</td>
+                                    <td>{{car.modelYear}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Daily Price</td>
+                                    <td>{{car.dailyPrice | vatAdded:18 | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rent Start Date</td>
+                                    <td>{{rental.rentStartDate | date: "dd.MM.y HH:mm a z"}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rent End Date</td>
+                                    <td>{{rental.rentEndDate | date: "dd.MM.y HH:mm a z"}}</td>
+                                </tr>
+                                <tr class="amount">
+                                    <td>Total Amount</td>
+                                    <td>{{rental.amount | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <button type="submit" (click) = "pay()" class="btn btn-primary btn-lg btn-block">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

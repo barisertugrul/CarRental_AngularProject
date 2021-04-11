@@ -11,9 +11,12 @@
           Return Cars List
         </button>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
+    </div>    
+    <div *ngIf="dataLoaded == false" class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+  </div>
+    <div *ngIf="dataLoaded == true" class="row">
+      <div class="col-lg-6 col-md-12">
         <div class="card text-center">
           <div class="card-header">
             <div *ngIf="!car" class="alert alert-info w-100" role="alert">
@@ -65,6 +68,8 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
         <div *ngIf="car" class="card">
           <div class="card-header text-center">Car Detail</div>
           <div class="card-body">

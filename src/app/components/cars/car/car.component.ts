@@ -4,7 +4,7 @@ import { Brand } from 'app/models/brand';
 import { CarDto } from 'app/models/carDto';
 import { CarImage } from 'app/models/carImage';
 import { Color } from 'app/models/color';
-import { CarDtoService } from 'app/services/car-dto.service';
+import { CarService } from 'app/services/car.service';
 import { SearchFilterService } from 'app/services/searchFilter.service';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
@@ -24,7 +24,7 @@ export class CarComponent implements OnInit {
   filterBrand : Brand = {id:0,name:"All Brands"};
   filterColor : Color = {id:0,name:"All Colors"};
   
-  constructor(private carService:CarDtoService,
+  constructor(private carService:CarService,
     private activatedRoute:ActivatedRoute,
     private searchFilterService:SearchFilterService,
     private toastrService:ToastrService) { }
@@ -43,7 +43,7 @@ export class CarComponent implements OnInit {
   }
 
   getCars(){
-    this.carService.getCars().subscribe(response=>{
+    this.carService.getCarsWithDetails().subscribe(response=>{
       this.cars = response.data
       //this.subTitle = "All Cars"
       this.toastrService.success("All Cars")
@@ -52,7 +52,7 @@ export class CarComponent implements OnInit {
   }
 
   getCarsByBrand(brandId:number){
-    this.carService.getCarsByBrand(brandId).subscribe(response=>{
+    this.carService.getCarsByBrandWithDetails(brandId).subscribe(response=>{
       this.cars = response.data
       let message = (brandId < 1)? "All Brands":this.filterBrand.name
       //this.subTitle = "Cars by " + message
@@ -64,7 +64,7 @@ export class CarComponent implements OnInit {
   }
 
   getCarsByColor(colorId:number){
-    this.carService.getCarsByColor(colorId).subscribe(response=>{
+    this.carService.getCarsByColorWithDetails(colorId).subscribe(response=>{
       this.cars = response.data
       let message = (colorId < 1)? "All Colors":this.filterColor.name + " colored"
       //this.subTitle = "Cars by " + message
@@ -76,7 +76,7 @@ export class CarComponent implements OnInit {
   }
 
   getCarsByBrandAndColor(){
-    this.carService.getCarsByBrandAndColor(this.filterBrand.id,this.filterColor.id).subscribe(response=>{
+    this.carService.getCarsByBrandAndColorWithDetails(this.filterBrand.id,this.filterColor.id).subscribe(response=>{
       this.cars = response.data
       let brandMessage = (this.filterBrand.id < 1)? "All Brands":this.filterBrand.name
       let colorMessage = (this.filterColor.id < 1)? "All Colors":this.filterColor.name + " colored"

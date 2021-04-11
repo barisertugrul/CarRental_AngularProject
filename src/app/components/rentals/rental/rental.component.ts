@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RentalDto } from 'app/models/rentalDto';
-import { RentalDtoService } from 'app/services/rental-dto.service';
+import { RentalService } from 'app/services/rental.service';
 
 @Component({
   selector: 'app-rental',
@@ -13,14 +13,14 @@ export class RentalComponent implements OnInit {
   dataLoaded = false;
   subTitle:string = "";
 
-  constructor(private rentalService:RentalDtoService) { }
+  constructor(private rentalService:RentalService) { }
   
   ngOnInit(): void {
     this.getRentals();
   }
 
   getRentals(){
-    this.rentalService.getRentals().subscribe(response=>{
+    this.rentalService.getRentalsWithDetails().subscribe(response=>{
       this.rentals = response.data
       this.subTitle = "All Rentals"
       this.dataLoaded = true

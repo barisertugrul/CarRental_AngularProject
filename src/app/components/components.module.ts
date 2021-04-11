@@ -25,6 +25,8 @@ import { RentalInCarDetailComponent } from './rentals/rental-in-car-detail/renta
 import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datepicker-range.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdDatepickerRangePopupComponent } from './ngbd-datepicker-range-popup/ngbd-datepicker-range-popup.component';
+import { PaymentComponent } from './Payments/payment/payment.component';
+import { PaymentSuccessComponent } from './Payments/payment-success/payment-success.component';
 //import { ClickOutsideDirective } from 'app/directives/click-outside.directive';
 
 
@@ -58,6 +60,8 @@ import { NgbdDatepickerRangePopupComponent } from './ngbd-datepicker-range-popup
     RentalInCarDetailComponent,
     NgbdDatepickerRangeComponent,
     NgbdDatepickerRangePopupComponent,
+    PaymentComponent,
+    PaymentSuccessComponent,
   ],
   exports: [
     FooterComponent,

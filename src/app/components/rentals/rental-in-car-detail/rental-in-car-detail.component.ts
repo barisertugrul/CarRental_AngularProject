@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from 'app/models/car';
 import { CustomerDto } from 'app/models/customerDto';
 import { Rental } from 'app/models/rental';
-import { CustomerDtoService } from 'app/services/customer-dto.service';
+import { CustomerService } from 'app/services/customer.service';
 import { RentalService } from 'app/services/rental.service';
 import { ToastrService } from 'ngx-toastr';
 import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-rental-in-car-detail',
@@ -37,12 +38,14 @@ export class RentalInCarDetailComponent implements OnInit {
   };
   model: NgbDateStruct;
   vatRate: number = 18;
+  amount:number = 0;
   
   constructor(
     private rentalService:RentalService,
-    private customerService: CustomerDtoService,
+    private customerService: CustomerService,
     private toastrService: ToastrService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private router:Router
     ) { }
 
   ngOnInit(): void {
@@ -52,20 +55,24 @@ export class RentalInCarDetailComponent implements OnInit {
 
   createRentAddForm(){
     this.rentAddForm = this.formBuilder.group({
-      customerId:[1,Validators.required],
+      customerId:[0,Validators.required],
       carId:[this.car.carId,Validators.required],
       rentStartDate:["",Validators.required],
-      rentEndDate:["",Validators.required]
+      rentEndDate:["",Validators.required],
+      amount:["",Validators.required]
     });
   }
 
   rentAdd(){
     if(this.rentAddForm.valid){
+      this.rentAddForm.patchValue({"customerId":parseInt(this.rentAddForm.get("customerId").value.toString())});
       let rentalModel = Object.assign({}, this.rentAddForm.value)
+      
       this.rentalService.add(rentalModel).subscribe(response => {
-        console.log(response)
         if(response.success){
           this.toastrService.success(response.message, "Success")
+          this.toastrService.success("Navigate to  Payment Page", "Navigate");
+          this.router.navigate(['/payment', {payTo:response.data}]);
         }else{
           this.toastrService.error(response.message, "Error")
         }
@@ -88,7 +95,7 @@ export class RentalInCarDetailComponent implements OnInit {
   }
 
   getCustomers() {
-    this.customerService.getCustomers().subscribe(response => {
+    this.customerService.getCustomersWithDetails().subscribe(response => {
       this.customers = response.data;
     })
   }
@@ -102,7 +109,7 @@ export class RentalInCarDetailComponent implements OnInit {
     this.dateRange = range;
     if(range["startDate"]){
       let startDate:any = range["startDate"]
-    this.dateRangeStart = new Date(startDate["year"],startDate["month"]-1,startDate["day"])
+      this.dateRangeStart = new Date(startDate["year"],startDate["month"]-1,startDate["day"])
     }
     if(range["endDate"]){
       let endDate:any = range["endDate"]
@@ -113,6 +120,7 @@ export class RentalInCarDetailComponent implements OnInit {
     this.getRentDaysCount()
     this.rentAddForm.controls['rentStartDate'].setValue(this.dateRangeStart);
     this.rentAddForm.controls['rentEndDate'].setValue(this.dateRangeEnd);
+    this.rentAddForm.controls['amount'].setValue(this.totalAmount + (this.totalAmount * this.vatRate/100));
   }
 
   getRentDaysCount(){

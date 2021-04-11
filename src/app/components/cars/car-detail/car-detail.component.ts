@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarDto } from 'app/models/carDto';
 import { CarImage } from 'app/models/carImage';
-import { CarDtoService } from 'app/services/car-dto.service';
+import { CarService } from 'app/services/car.service';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -18,7 +18,7 @@ export class CarDetailComponent implements OnInit {
   imageUrl = environment.baseURL;
   model: any;
   
-  constructor(private carService:CarDtoService,
+  constructor(private carService:CarService,
     private activatedRoute:ActivatedRoute,
     private router: Router) { }
 
@@ -37,7 +37,7 @@ export class CarDetailComponent implements OnInit {
   }
 
   getCarById(carId:number){
-    this.carService.getCarById(carId).subscribe(response=>{
+    this.carService.getCarDetailsById(carId).subscribe(response=>{
       this.car = response.data;
       this.images = this.car.images;
       this.subTitle = "";
