@@ -6,7 +6,7 @@ import { Rental } from 'app/models/rental';
 import { CustomerService } from 'app/services/customer.service';
 import { RentalService } from 'app/services/rental.service';
 import { ToastrService } from 'ngx-toastr';
-import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 declare var $: any;

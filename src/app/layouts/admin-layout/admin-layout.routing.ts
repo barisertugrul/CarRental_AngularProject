@@ -16,6 +16,9 @@ import { CarComponent } from 'app/components/cars/car/car.component';
 import { CarDetailComponent } from 'app/components/cars/car-detail/car-detail.component';
 import { PaymentComponent } from 'app/components/Payments/payment/payment.component';
 import { PaymentSuccessComponent } from 'app/components/Payments/payment-success/payment-success.component';
+import { BrandEditComponent } from 'app/components/brands/brand-edit/brand-edit.component';
+import { ColorEditComponent } from 'app/components/colors/color-edit/color-edit.component';
+import { CarEditComponent } from 'app/components/cars/car-edit/car-edit.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -61,13 +64,16 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'cars',                 component: CarComponent },
+    { path: 'cars/edit/:carId',     component: CarEditComponent },
     { path: 'cars/brand/all',       component: CarComponent },
     { path: 'cars/brand/:brandId',  component: CarComponent },
     { path: 'cars/color/all',       component: CarComponent },
     { path: 'cars/color/:colorId',  component: CarComponent },
     { path: 'cars/car/:carId',      component: CarDetailComponent },
     { path: 'brands',               component: BrandComponent },
+    { path: 'brands/edit/:brandId', component: BrandEditComponent },
     { path: 'colors',               component: ColorComponent },
+    { path: 'colors/edit/:colorId', component: ColorEditComponent },
     { path: 'rentals',              component: RentalComponent },
     { path: 'customers',            component: CustomerComponent },
     { path: 'dashboard',            component: DashboardComponent },

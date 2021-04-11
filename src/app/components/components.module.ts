@@ -27,6 +27,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdDatepickerRangePopupComponent } from './ngbd-datepicker-range-popup/ngbd-datepicker-range-popup.component';
 import { PaymentComponent } from './Payments/payment/payment.component';
 import { PaymentSuccessComponent } from './Payments/payment-success/payment-success.component';
+import { BrandEditComponent } from './brands/brand-edit/brand-edit.component';
+import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
+import { ColorEditComponent } from './colors/color-edit/color-edit.component';
+import { CarEditComponent } from './cars/car-edit/car-edit.component';
 //import { ClickOutsideDirective } from 'app/directives/click-outside.directive';
 
 
@@ -62,6 +66,10 @@ import { PaymentSuccessComponent } from './Payments/payment-success/payment-succ
     NgbdDatepickerRangePopupComponent,
     PaymentComponent,
     PaymentSuccessComponent,
+    BrandEditComponent,
+    ModalConfirmComponent,
+    ColorEditComponent,
+    CarEditComponent,
   ],
   exports: [
     FooterComponent,

@@ -35,7 +35,7 @@
                   [ngClass]="getSlideClass(i)"
                 >
                   <img
-                    class="d-block h-100"
+                    class="d-block img-fluid w-100"
                     src="{{ imageUrl }}/{{ image.imagePath }}"
                     alt="{{ car.brandName }}"
                   />
@@ -101,7 +101,7 @@
           <div class="card-footer text-muted">
             <div class="col-lg-12 col-md-12">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-success btn-round me-md-2" type="button">
+                <button routerLink = "/cars/edit/{{car.carId}}" class="btn btn-success btn-round me-md-2" type="button">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                 </button>
                 <app-rental-in-car-detail

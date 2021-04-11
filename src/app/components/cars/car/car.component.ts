@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Brand } from 'app/models/brand';
+import { Car } from 'app/models/car';
 import { CarDto } from 'app/models/carDto';
 import { CarImage } from 'app/models/carImage';
 import { Color } from 'app/models/color';
+import { BrandService } from 'app/services/brand.service';
 import { CarService } from 'app/services/car.service';
+import { ColorService } from 'app/services/color.service';
 import { SearchFilterService } from 'app/services/searchFilter.service';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 
+declare var $: any;
 
 @Component({
   selector: 'app-car',
@@ -23,11 +29,22 @@ export class CarComponent implements OnInit {
   imageUrl = environment.baseURL;
   filterBrand : Brand = {id:0,name:"All Brands"};
   filterColor : Color = {id:0,name:"All Colors"};
+  brands:Brand[]=[]
+  colors:Color[]=[]
+  currentCar:CarDto;
+  carAddForm:FormGroup;
+  formLoaded:boolean=false;
   
-  constructor(private carService:CarService,
+  constructor(
+    private carService:CarService,
     private activatedRoute:ActivatedRoute,
     private searchFilterService:SearchFilterService,
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService,
+    private brandService:BrandService,
+    private colorService:ColorService,
+    private formBuilder:FormBuilder,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -86,12 +103,69 @@ export class CarComponent implements OnInit {
     });
   }
 
-  editCar(carId:Number){
-
+  getBrands(){
+    this.brandService.getBrands().subscribe(response=>{
+      this.brands = response.data
+    });
   }
 
-  deleteCar(carId:number){
+  getColors(){
+    this.colorService.getColors().subscribe(response=>{
+      this.colors = response.data
+    });
+  }
 
+  showCarAddForm():void{
+    this.getBrands();
+    this.getColors();
+
+    $("#modalCarAddForm").modal('show')
+    this.createCarAddForm();
+  }
+
+  createCarAddForm() {
+    this.carAddForm = this.formBuilder.group({
+      carId:[0,Validators.required],
+      colorId:[0,Validators.required],
+      brandId:[0,Validators.required],
+      carName:["",Validators.required],
+      modelYear:[null,Validators.required],
+      dailyPrice:[null,Validators.required],
+      description:[""]
+    });
+    this.formLoaded=true;
+  }
+
+  saveChanges(){
+    if(this.carAddForm.valid){
+      let carModel = Object.assign({}, this.carAddForm.value)
+      
+      this.carService.add(carModel).subscribe(response => {
+        this.toastrService.success(response.message, "Success")
+      },responseError=>{
+        this.toastrService.error(responseError.error);
+      })
+    }else{
+      this.toastrService.error("Formunuz eksik", "Uyarı")
+    }
+  }
+
+  openDeleteConfirmForm(car:CarDto, content:any) {
+    this.currentCar = car
+    this.modalService.open(content, { scrollable: true });
+  }
+
+  delete(car:CarDto){
+    
+    this.carService.getCarById(car.carId).subscribe(response=>{
+      let deletedCar:Car = response.data;
+      this.carService.delete(deletedCar).subscribe(response => {
+        this.toastrService.success(response.message, "Success")
+        this.getCars();
+      },responseError=>{
+        this.toastrService.error(responseError.error);
+      })
+    });
   }
 
   rentCar(carId:number){

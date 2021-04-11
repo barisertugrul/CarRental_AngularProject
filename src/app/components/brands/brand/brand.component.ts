@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { Brand } from 'app/models/brand';
 import { BrandService } from 'app/services/brand.service';
 import { SearchFilterService } from 'app/services/searchFilter.service';
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConfirmComponent } from 'app/components/modal-confirm/modal-confirm.component';
+declare var $: any;
 
 @Component({
   selector: 'app-brand',
@@ -13,9 +18,18 @@ export class BrandComponent implements OnInit {
   brands:Brand[] = [];
   dataLoaded = false;
   subTitle:string = "";
-  
+  formLoaded:boolean=false;
+  brandAddForm: FormGroup;
+  currentBrand:Brand;
+  withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
+      (click)="modal.close('Ok click')">Ok</button>`;
+
   constructor(private brandService:BrandService,
-    private searchFilterService:SearchFilterService) { }
+    private searchFilterService:SearchFilterService,
+    private toastrService: ToastrService,
+    private formBuilder:FormBuilder,
+    private _modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -40,7 +54,50 @@ export class BrandComponent implements OnInit {
 
   get searchResultText(){
     let filterData = this.searchFilterService.filterData;
-    return (filterData.length > 0)?"Search results for \"" + filterData + "\"":"All Brands";
+    return (filterData.length > 0)?"Search results for \"" + filterData + "\"":this.subTitle;
+  }
+
+  showBrandAddForm():void{
+    $("#modalBrandAddForm").modal('show')
+    this.createBrandAddForm();
+  }
+
+  createBrandAddForm(){
+    this.brandAddForm = this.formBuilder.group({
+      id:[0,Validators.required],
+      name:["",Validators.required]
+    });
+    this.formLoaded=true;
+  }
+
+  saveChanges(){
+    if(this.brandAddForm.valid){
+      let brandModel = Object.assign({}, this.brandAddForm.value)
+      
+      this.brandService.add(brandModel).subscribe(response => {
+        this.toastrService.success(response.message, "Success")
+        $("#modalBrandAddForm").modal('hide')
+        this.getBrands();
+      },responseError=>{
+        this.toastrService.error(responseError.error);
+      })
+    }else{
+      this.toastrService.error("Formunuz eksik", "Uyarı")
+    }
+  }
+
+  openDeleteConfirmForm(brand:Brand, content:any) {
+    this.currentBrand = brand
+    this._modalService.open(content);
+  }
+
+  delete(brand:Brand){
+    this.brandService.delete(brand).subscribe(response => {
+      this.toastrService.success(response.message, "Success")
+      this.getBrands();
+    },responseError=>{
+      this.toastrService.error(responseError.error);
+    })
   }
 
 }

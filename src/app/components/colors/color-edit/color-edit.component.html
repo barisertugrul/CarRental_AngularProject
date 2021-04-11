@@ -1,0 +1,39 @@
+<div class="main-content">
+	<div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <button
+              routerLink="/colors"
+              type="button"
+              class="btn btn-info"
+            >
+              Return Colors List
+            </button>
+          </div>
+        </div>    
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="card border-success">
+					<div class="card-header card-header-warning border-success">
+                        <h4 class="card-title">Edit Color</h4>
+                        <p class="card-category">{{subTitle}}</p>
+			  
+					</div>
+					<div class="card-body text-success">
+						<form *ngIf="formLoaded" [formGroup]="colorEditForm">
+                            <div class="form-group">
+                              <label for="colorName">Color Name</label>
+                              <input type="text" formControlName="name" class="form-control" id="colorName" aria-describedby="colorNameHelp">
+                              <small id="colorNameHelp" class="form-text text-muted">Type new color name.</small>
+                            </div>
+                            <button (click)="saveChanges()" type="submit" class="btn btn-primary">Save</button>
+                          </form>
+					</div>
+					<div class="card-footer bg-transparent border-success">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
