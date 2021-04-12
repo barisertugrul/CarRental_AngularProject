@@ -63,7 +63,7 @@ export class CarComponent implements OnInit {
     this.carService.getCarsWithDetails().subscribe(response=>{
       this.cars = response.data
       //this.subTitle = "All Cars"
-      this.toastrService.success("All Cars")
+      this.toastrService.info("All Cars listed")
       this.dataLoaded = true
     });
   }
@@ -75,7 +75,7 @@ export class CarComponent implements OnInit {
       //this.subTitle = "Cars by " + message
       this.dataLoaded = true
       if(this.filterBrand.id > 0){
-        this.toastrService.success("Cars listed for " + message)
+        this.toastrService.info("Cars listed for " + message)
       }
     });
   }
@@ -87,7 +87,7 @@ export class CarComponent implements OnInit {
       //this.subTitle = "Cars by " + message
       this.dataLoaded = true
       if(this.filterColor.id > 0){
-        this.toastrService.success("Cars listed for " + message)
+        this.toastrService.info("Cars listed for " + message)
       }
     });
   }
@@ -99,7 +99,7 @@ export class CarComponent implements OnInit {
       let colorMessage = (this.filterColor.id < 1)? "All Colors":this.filterColor.name + " colored"
       //this.subTitle = "Cars by " + brandMessage + " and " + colorMessage
       this.dataLoaded = true
-      this.toastrService.success("Cars listed for with " + brandMessage + " and " + colorMessage)
+      this.toastrService.info("Cars listed for with " + brandMessage + " and " + colorMessage)
     });
   }
 
@@ -138,12 +138,22 @@ export class CarComponent implements OnInit {
 
   saveChanges(){
     if(this.carAddForm.valid){
+      this.carAddForm.patchValue({"brandId":parseInt(this.carAddForm.get("brandId").value.toString())});
+      this.carAddForm.patchValue({"colorId":parseInt(this.carAddForm.get("colorId").value.toString())});
       let carModel = Object.assign({}, this.carAddForm.value)
-      
+      console.log(carModel)
       this.carService.add(carModel).subscribe(response => {
         this.toastrService.success(response.message, "Success")
+        this.getCars()
+        $("#modalCarAddForm").modal('hide')
       },responseError=>{
-        this.toastrService.error(responseError.error);
+        if(responseError.error.ValidationErrors != null 
+          && responseError.error.ValidationErrors.length>0){
+          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error");
+          }
+        };
+        console.log(responseError.error);
       })
     }else{
       this.toastrService.error("Formunuz eksik", "Uyarı")
@@ -163,7 +173,15 @@ export class CarComponent implements OnInit {
         this.toastrService.success(response.message, "Success")
         this.getCars();
       },responseError=>{
-        this.toastrService.error(responseError.error);
+        if(responseError.error.ValidationErrors != null 
+          && responseError.error.ValidationErrors.length>0){
+          let errorText:string;
+          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+            //errorText += responseError.error.ValidationErrors[i].ErrorMessage + "\n";
+            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error");
+          }
+          //this.toastrService.error(errorText, "Validation Error");
+        };
       })
     });
   }

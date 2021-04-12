@@ -20,7 +20,6 @@ import { CarAddComponent } from './cars/car-add/car-add.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FilterBrandPipe } from 'app/pipes/filter-brand.pipe';
 import { FilterColorPipe } from 'app/pipes/filter-color.pipe';
-import { BrandColorFilterComponent } from './brands/brand-color-filter/brand-color-filter.component';
 import { RentalInCarDetailComponent } from './rentals/rental-in-car-detail/rental-in-car-detail.component';
 import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datepicker-range.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +30,9 @@ import { BrandEditComponent } from './brands/brand-edit/brand-edit.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { ColorEditComponent } from './colors/color-edit/color-edit.component';
 import { CarEditComponent } from './cars/car-edit/car-edit.component';
+import { LoginComponent } from './login/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'app/interceptors/auth.interceptor';
 //import { ClickOutsideDirective } from 'app/directives/click-outside.directive';
 
 
@@ -60,7 +62,6 @@ import { CarEditComponent } from './cars/car-edit/car-edit.component';
     VatAddedPipe,
     CarAddComponent,
     SearchBarComponent,
-    BrandColorFilterComponent,
     RentalInCarDetailComponent,
     NgbdDatepickerRangeComponent,
     NgbdDatepickerRangePopupComponent,
@@ -70,11 +71,15 @@ import { CarEditComponent } from './cars/car-edit/car-edit.component';
     ModalConfirmComponent,
     ColorEditComponent,
     CarEditComponent,
+    LoginComponent,
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent
+  ],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
   ]
 })
 export class ComponentsModule { }

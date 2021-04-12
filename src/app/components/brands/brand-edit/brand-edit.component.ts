@@ -57,7 +57,11 @@ export class BrandEditComponent implements OnInit {
       this.brandService.update(brandModel).subscribe(response => {
         this.toastrService.success(response.message, "Success")
       },responseError=>{
-        this.toastrService.error(responseError.error);
+        if(responseError.error.ValidationErrors.length>0){
+          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error");
+          }
+        };
       })
     }else{
       this.toastrService.error("Formunuz eksik", "Uyarı")

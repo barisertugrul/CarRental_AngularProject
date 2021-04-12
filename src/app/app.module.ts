@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 
@@ -27,6 +27,7 @@ import {ToastrModule} from "ngx-toastr"
 import { SearchFilterService } from './services/searchFilter.service';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { ClickCursorDirective } from './directives/click-cursor.directive';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   imports: [
@@ -50,7 +51,10 @@ import { ClickCursorDirective } from './directives/click-cursor.directive';
     ClickOutsideDirective,
     ClickCursorDirective
   ],
-  providers: [SearchFilterService],
+  providers: [
+    SearchFilterService,
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -42,7 +42,7 @@ export class CarEditComponent implements OnInit {
       }
     });
   }
-  
+
   getCarById(carId: number) {
     this.carService.getCarById(carId).subscribe(response=>{
       this.car = response.data;
@@ -84,7 +84,11 @@ export class CarEditComponent implements OnInit {
       this.carService.update(carModel).subscribe(response => {
         this.toastrService.success(response.message, "Success")
       },responseError=>{
-        this.toastrService.error(responseError.error);
+        if(responseError.error.ValidationErrors.length>0){
+          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Validation Error");
+          }
+        };
       })
     }else{
       this.toastrService.error("Formunuz eksik", "Uyarı")

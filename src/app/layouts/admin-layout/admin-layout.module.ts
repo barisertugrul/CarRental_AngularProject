@@ -19,6 +19,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'app/interceptors/auth.interceptor';
 
 @NgModule({
   imports: [
@@ -44,6 +46,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+  ],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
   ]
 })
 

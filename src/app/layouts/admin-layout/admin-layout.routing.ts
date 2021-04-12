@@ -19,6 +19,8 @@ import { PaymentSuccessComponent } from 'app/components/Payments/payment-success
 import { BrandEditComponent } from 'app/components/brands/brand-edit/brand-edit.component';
 import { ColorEditComponent } from 'app/components/colors/color-edit/color-edit.component';
 import { CarEditComponent } from 'app/components/cars/car-edit/car-edit.component';
+import { LoginComponent } from 'app/components/login/login.component';
+import { LoginGuard } from 'app/guards/login.guard';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -64,7 +66,7 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'cars',                 component: CarComponent },
-    { path: 'cars/edit/:carId',     component: CarEditComponent },
+    { path: 'cars/edit/:carId',     component: CarEditComponent, canActivate:[LoginGuard] },
     { path: 'cars/brand/all',       component: CarComponent },
     { path: 'cars/brand/:brandId',  component: CarComponent },
     { path: 'cars/color/all',       component: CarComponent },
@@ -86,4 +88,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',                 component: MapsComponent },
     { path: 'notifications',        component: NotificationsComponent },
     { path: 'upgrade',              component: UpgradeComponent },
+    { path: 'login',                component: LoginComponent }
 ];
