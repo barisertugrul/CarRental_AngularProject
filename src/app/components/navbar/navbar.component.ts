@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     
+    
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
           this.sidebarVisible = false;
@@ -112,11 +113,12 @@ export class NavbarComponent implements OnInit {
 
     getTitle(){
       var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 1 );
-      }
+      //if(titlee.charAt(0) === '#'){
+          //titlee = titlee.slice( 1 );
+      //}
 
       for(var item = 0; item < this.listTitles.length; item++){
+        console.log(this.listTitles[item].path)
           if(this.listTitles[item].path === titlee){
               return this.listTitles[item].title;
           }

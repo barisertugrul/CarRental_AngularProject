@@ -28,6 +28,8 @@ import { SearchFilterService } from './services/searchFilter.service';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { ClickCursorDirective } from './directives/click-cursor.directive';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 @NgModule({
   imports: [
@@ -48,6 +50,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    AuthLayoutComponent,
+    PublicLayoutComponent,
     ClickOutsideDirective,
     ClickCursorDirective
   ],

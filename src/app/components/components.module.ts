@@ -30,7 +30,6 @@ import { BrandEditComponent } from './brands/brand-edit/brand-edit.component';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { ColorEditComponent } from './colors/color-edit/color-edit.component';
 import { CarEditComponent } from './cars/car-edit/car-edit.component';
-import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'app/interceptors/auth.interceptor';
 //import { ClickOutsideDirective } from 'app/directives/click-outside.directive';
@@ -71,7 +70,6 @@ import { AuthInterceptor } from 'app/interceptors/auth.interceptor';
     ModalConfirmComponent,
     ColorEditComponent,
     CarEditComponent,
-    LoginComponent,
   ],
   exports: [
     FooterComponent,

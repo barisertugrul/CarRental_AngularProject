@@ -4,20 +4,44 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 const routes: Routes =[
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-  }, {
+  }, 
+  {
     path: '',
+    component: PublicLayoutComponent,
+    children: [{
+      path: '',
+      loadChildren: './layouts/public-layout/public-layout.module#PublicLayoutModule'
+    }]
+  }, 
+  {
+    path: 'control-panel',
     component: AdminLayoutComponent,
     children: [{
       path: '',
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
     }]
+  },
+   {
+    path: 'auth',
+    component: AuthLayoutComponent,
+    children: [{
+      path: '',
+      loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
+    }]
+  },{
+    path: '**',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   }
+  //{ path: 'authLayout', loadChildren: () => import('./layouts/auth-layout/auth-layout.module').then(m => m.AuthLayoutModule) }
 ];
 
 @NgModule({
@@ -28,7 +52,6 @@ const routes: Routes =[
        useHash: false
     })
   ],
-  exports: [
-  ],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
